@@ -87,3 +87,88 @@ if (isset($_POST['formconnection']))
 		$erreur2 = "Tous les champs doivent être complétés !";
 	}
 }
+
+/********** R E C U P E R A T I O N   M O T   D E   P A S S E ****************************************/
+
+/* Lorsque l'on appuie sur le button pour recuperer le mot de passe */
+if (isset($_POST['recup_csubmit'])) 
+{
+	if(!empty($_POST['recup_mail']))
+	{
+		$recup_mail = htmlspecialchars($_POST['recup_mail']);
+		if(filter_var($recup_mail,FILTER_VALIDATE_EMAIL))
+		{
+			$mailexist = $bdd->prepare('SELECT id,Nom,Prenom FROM utilisateurs WHERE mail = ?');
+			$mailexist->execute(array($recup_mail)); 
+			$mailexist_count = $mailexist->rowCount();
+			if($mailexist_count == 1)
+			{
+				$res = $mailexist->fetch();
+				$recup_nom = $res['Nom'];
+				$recup_prenom = $res['Prenom'];
+
+				$_SESSION['recup_mail'] = $recup_mail;
+				$recup_code = "";
+				for ($i=0; $i < 8; $i++) 
+				{ 
+					$recup_code .= mt_rand(0,9);
+				}
+
+				$mail_recup_exist = $bdd->prepare('SELECT id FROM recuperation WHERE mail = ?');
+				$mail_recup_exist->execute(array($recup_mail));
+				$mail_recup_exist = $mail_recup_exist->rowCount();
+
+				if($mail_recup_exist == 1)
+				{
+					$recup_insert = $bdd->prepare('UPDATE recuperation SET code = ? WHERE mail = ?');
+					$recup_insert->execute(array($recup_code,$recup_mail));	
+				}
+				else
+				{
+					$recup_insert = $bdd->prepare('INSERT INTO recuperation(mail,code,confirme) VALUES (?,?,?)');
+					$recup_insert->execute(array($recup_mail,$recup_code,0));	
+				}
+				/************** FORME DU MAIL *******************/
+
+				$header="MIME-Version: 1.0\r\n";
+				$header.='From:"GeoInfo.com"<support@primfx.com>'."\n";
+				$header.='Content-Type:text/html; charset="utf-8"'."\n";
+				$header.='Content-Transfer-Encoding: 8bit';
+       
+				$message = '
+				<html>
+				<head>
+					<title>Récupération de mot de passe</title>
+					<meta charset="utf-8" />
+				</head>
+				<body>
+					<div align="left">Bonjour <b>'.$recup_nom.' '.$recup_prenom.'</b>,</div><br />
+					Voici votre code de récupération : <b>'.$recup_code.'</b><br /><br />
+					A bientôt 
+					<br>
+					<br>
+					Ceci est un email automatique, merci de ne pas y répondre
+					</div>
+				</body>
+				</html>
+				';
+
+				mail($recup_mail,"Récupération de mot de passe",$message,$header);
+				header("Location:recuperation.php?section=code");
+			}
+			else
+			{
+				$erreur3 = "Cette adresse mail n'est pas enregistrée !";
+			}
+		}
+		else
+		{
+			$erreur3 = "Adresse mail invalide !";
+		}
+
+	}
+	else
+	{
+		$erreur3 = "Veuillez entrer votre adresse mail !";
+	}
+}

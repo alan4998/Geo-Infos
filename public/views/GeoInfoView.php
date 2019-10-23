@@ -14,7 +14,7 @@
 						<label for="nom">Nom :</label> 
 					</td>
 					<td>
-						<input type="text" placeholder="nom" id="nom" name="nom">
+						<input type="text" placeholder="nom" id="nom" name="nom" autocomplete="off">
 					</td>
 				</tr>
 				<tr>
@@ -22,7 +22,7 @@
 						<label for="prénom">Prénom :</label> 
 					</td>
 					<td>
-						<input type="text" placeholder="prénom" id="prenom" name="prenom">
+						<input type="text" placeholder="prénom" id="prenom" name="prenom" autocomplete="off">
 					</td>
 				</tr>
 				<tr>
@@ -30,7 +30,7 @@
 						<label for="mail">Adresse mail :</label> 
 					</td>
 					<td>
-						<input type="email" placeholder="Votre adresse mail" id="mail" name="email">
+						<input type="email" placeholder="Votre adresse mail" id="mail" name="email" autocomplete="off">
 					</td>
 				</tr>
 				<tr>
@@ -38,7 +38,7 @@
 						<label for="mdp">Mot de passe :</label> 
 					</td>
 					<td>
-						<input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp">
+						<input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" autocomplete="off">
 					</td>
 				</tr>
 			</table>
@@ -60,7 +60,7 @@
 						<label for="mail">Adresse mail :</label> 
 					</td>
 					<td>
-						<input type="email" placeholder="Votre adresse mail" id="mail" name="emailconnect">
+						<input type="email" placeholder="Votre adresse mail" id="mail" name="emailconnect" autocomplete="off">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 						<label for="mdp">Mot de passe :</label> 
 					</td>
 					<td>
-						<input type="password" placeholder="Votre mot de passe" id="mdp" name="mdpconnect">
+						<input type="password" placeholder="Votre mot de passe" id="mdp" name="mdpconnect" autocomplete="off">
 					</td>
 				</tr>
 			</table>
@@ -90,12 +90,12 @@
 						<label for="mail">Adresse mail :</label> 
 					</td>
 					<td>
-						<input type="email" placeholder="Votre adresse mail" id="mail" name="emailtofind">
+						<input type="email" placeholder="Votre adresse mail" id="mail" name="recup_mail" autocomplete="off">
 					</td>
 				</tr>
 			</table>
 			<br>
-			<input type="submit" name="recupmail" value="Récupérer mon mot de passe" />		
+			<input type="submit" name="recup_csubmit" value="Récupérer mon mot de passe" />		
 		</form>
 		<?php
 		if(isset($erreur3))

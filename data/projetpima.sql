@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 22 oct. 2019 à 15:22
+-- Généré le :  mer. 23 oct. 2019 à 16:57
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -25,6 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `recuperation`
+--
+
+DROP TABLE IF EXISTS `recuperation`;
+CREATE TABLE IF NOT EXISTS `recuperation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mail` varchar(255) NOT NULL,
+  `code` int(11) NOT NULL,
+  `confirme` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateurs`
 --
 
@@ -36,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `mail` varchar(255) NOT NULL,
   `password` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
